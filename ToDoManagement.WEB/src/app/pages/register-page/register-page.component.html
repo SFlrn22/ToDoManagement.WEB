@@ -1,0 +1,30 @@
+<div class="page-container">
+    <div class="login-form" (ngSubmit)="onSubmit()" [formGroup]="registerForm">
+        <div class="form-fields">
+            <mat-form-field appearance="outline">
+                <mat-label>Enter your Username</mat-label>
+                <input matInput formControlName="username" required />
+                <mat-error *ngIf="registerForm.controls.username.errors?.['required']">{{
+                    "You must enter a username"
+                    }}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Enter your password</mat-label>
+                <input matInput formControlName="password" [type]="hide ? 'password' : 'text'" />
+                <mat-error *ngIf="registerForm.controls.password.errors?.['required']">{{
+                    "You must enter a password"
+                    }}</mat-error>
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide" class="borderless-button">
+                    <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+        <div class="buttons-div">
+            <button type="submit" class="submit-btn btn btn-outline-primary" (click)="onSubmit()">
+                Register
+            </button>
+            <button class="btn btn-outline-primary" (click)="clickBack()">Back</button>
+        </div>
+    </div>
+</div>
