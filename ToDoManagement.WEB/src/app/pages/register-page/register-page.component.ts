@@ -13,6 +13,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { CookieHelperService } from '../../services/cookie-helper-service/cookie-helper.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth-service/auth.service';
+import { SnackbarService } from '../../services/snackbar-service/snackbar.service';
 
 @Component({
   selector: 'app-register-page',
@@ -36,7 +38,8 @@ export class RegisterPageComponent implements OnInit {
   constructor(
     private location: Location,
     private router: Router,
-    private cookieHelper: CookieHelperService
+    private authService: AuthService,
+    private snackBarService: SnackbarService
   ) {}
 
   ngOnInit(): void {
@@ -48,7 +51,20 @@ export class RegisterPageComponent implements OnInit {
 
   onSubmit(): void {
     if (this.registerForm.valid) {
-      console.log('Valid');
+      this.authService
+        .register(this.registerForm.value)
+        .subscribe((data: any) => {
+          if (data.isSuccess != false) {
+            this.snackBarService.openSnackBar(
+              'Inregistrare realizata cu success',
+              'Close',
+              'success'
+            );
+            this.router.navigateByUrl('login');
+          } else {
+            this.snackBarService.openSnackBar(data, 'Close', 'error');
+          }
+        });
     }
   }
 

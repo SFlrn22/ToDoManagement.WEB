@@ -13,6 +13,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule, Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { CookieHelperService } from '../../services/cookie-helper-service/cookie-helper.service';
+import { AuthService } from '../../services/auth-service/auth.service';
+import { SnackbarService } from '../../services/snackbar-service/snackbar.service';
 
 @Component({
   selector: 'app-login-page',
@@ -36,7 +38,9 @@ export class LoginPageComponent implements OnInit {
   constructor(
     private location: Location,
     private router: Router,
-    private cookieHelper: CookieHelperService
+    private cookieHelper: CookieHelperService,
+    private authService: AuthService,
+    private snackBarService: SnackbarService
   ) {}
 
   ngOnInit(): void {
@@ -48,7 +52,28 @@ export class LoginPageComponent implements OnInit {
 
   onSubmit(): void {
     if (this.loginForm.valid) {
-      console.log('Valid');
+      this.authService.login(this.loginForm.value).subscribe((data: any) => {
+        if (data == true) {
+          this.cookieHelper.setCookies(
+            'username',
+            this.loginForm.username.value
+          );
+          this.snackBarService.openSnackBar(
+            'Logare realizata cu success, vei fi redirectat catre pagina de start',
+            'Close',
+            'success'
+          );
+          setTimeout(
+            () =>
+              this.router.navigateByUrl('home').then(() => {
+                window.location.reload();
+              }),
+            1500
+          );
+        } else {
+          this.snackBarService.openSnackBar(data, 'Close', 'error');
+        }
+      });
     }
   }
 
