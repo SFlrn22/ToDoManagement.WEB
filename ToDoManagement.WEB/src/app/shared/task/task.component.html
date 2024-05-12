@@ -1,0 +1,39 @@
+<div class="wrapper">
+    <div class="modal fade" id="{{taskDetails.recordID.substring(1)}}" tabindex="-1"
+        aria-labelledby="UpdateTaskModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="UpdateTaskModalLabel">Update Task</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" [formGroup]="updateTaskForm">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Enter task name</mat-label>
+                        <input matInput formControlName="name" required />
+                        <mat-error *ngIf="updateTaskForm.controls.name.errors?.['required']">{{
+                            "You must enter a task name"
+                            }}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Enter task status</mat-label>
+                        <input matInput formControlName="status" />
+                    </mat-form-field>
+                    <mat-checkbox class="example-margin" [checked]="keepStatusChecked"
+                        (change)="keepStatusChecked = !keepStatusChecked">Checked</mat-checkbox>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                        (click)="update()">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <span class="task-name">{{taskDetails.name}}</span>
+    <span class="task-status">{{taskDetails.status}}</span>
+    <div class="options">
+        <mat-icon (click)="delete()">delete</mat-icon>
+        <mat-icon data-bs-toggle="modal" [attr.data-bs-target]="taskDetails.recordID">edit</mat-icon>
+    </div>
+</div>

@@ -54,7 +54,7 @@ export class RegisterPageComponent implements OnInit {
       this.authService
         .register(this.registerForm.value)
         .subscribe((data: any) => {
-          if (data.isSuccess != false) {
+          if (data == true) {
             this.snackBarService.openSnackBar(
               'Inregistrare realizata cu success',
               'Close',

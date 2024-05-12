@@ -56,7 +56,7 @@ export class LoginPageComponent implements OnInit {
         if (data == true) {
           this.cookieHelper.setCookies(
             'username',
-            this.loginForm.username.value
+            this.loginForm.controls.username.value
           );
           this.snackBarService.openSnackBar(
             'Logare realizata cu success, vei fi redirectat catre pagina de start',
@@ -71,6 +71,9 @@ export class LoginPageComponent implements OnInit {
             1500
           );
         } else {
+          if (data == false) {
+            data = 'Invalid username or password';
+          }
           this.snackBarService.openSnackBar(data, 'Close', 'error');
         }
       });

@@ -1,1 +1,34 @@
-<p>task-page works!</p>
+<div class="page-container">
+    <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#AddTaskModal">Add Task</button>
+
+    <div class="modal fade" id="AddTaskModal" tabindex="-1" aria-labelledby="AddTaskModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="AddTaskModalLabel">Add Task</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" [formGroup]="addTaskForm">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Enter task name</mat-label>
+                        <input matInput formControlName="taskname" required />
+                        <mat-error *ngIf="addTaskForm.controls.taskname.errors?.['required']">{{
+                            "You must enter a task name"
+                            }}</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                        (click)="addTask()">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="task-wrapper">
+        <div *ngFor="let task of tasks;">
+            <app-task [taskDetails]="task"></app-task>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+.page-container {
+  height: calc(100% - 110px);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-container > button {
+  margin-top: 2rem;
+  width: 100px;
+  align-self: center;
+}
+
+.task-wrapper {
+  margin-top: 2rem;
+  width: 1000px;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+}
+
+mat-form-field,
+mat-label,
+input {
+  border-color: whitesmoke !important;
+  color: whitesmoke !important;
+}
+
+.buttons-div > button {
+  border-color: whitesmoke !important;
+  color: whitesmoke !important;
+}
+
+.buttons-div > button:hover {
+  background-color: rgba(245, 245, 245, 0.479);
+}

@@ -1,0 +1,28 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.task-status {
+  margin: 0 auto;
+}
+
+.options {
+  justify-self: end;
+}
+
+mat-form-field,
+mat-label,
+input {
+  border-color: whitesmoke !important;
+  color: whitesmoke !important;
+}
+
+.buttons-div > button {
+  border-color: whitesmoke !important;
+  color: whitesmoke !important;
+}
+
+.buttons-div > button:hover {
+  background-color: rgba(245, 245, 245, 0.479);
+}

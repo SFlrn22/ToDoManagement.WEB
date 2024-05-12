@@ -1,5 +1,5 @@
 export interface UpdateTaskRequest {
-  username: string;
-  taskName: string;
+  rid: string;
+  name: string;
   status: string;
 }
